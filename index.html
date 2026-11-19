@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicoMedic: Pharmacy Inventory &amp; Sales</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Login -->
+<div id="view-login" class="view">
+  <form id="login-form" class="login-card">
+    <h1>MicoMedic</h1>
+    <p class="sub">Pharmacy Inventory &amp; Sales, Kingston</p>
+    <label>Username <input id="in-user" autocomplete="username" required placeholder="owner / pharmacist / cashier"></label>
+    <label>Password <input id="in-pass" type="password" autocomplete="current-password" required placeholder="same as username (demo)"></label>
+    <button type="submit" class="primary">Log in</button>
+    <p class="hint">Demo accounts: <code>owner</code> / <code>owner</code>, <code>pharmacist</code> / <code>pharmacist</code>, <code>cashier</code> / <code>cashier</code></p>
+  </form>
+</div>
+
+<!-- App shell -->
+<div id="view-app" class="view hidden">
+  <header>
+    <strong>MicoMedic</strong>
+    <nav id="nav"></nav>
+    <span id="who"></span>
+    <button id="btn-logout" class="link">Log out</button>
+  </header>
+  <main>
+
+    <section id="screen-pos" class="screen hidden">
+      <h2>POS / Sale</h2>
+      <div class="pos-grid">
+        <div>
+          <input id="drug-search" placeholder="Search drug by name…" autocomplete="off">
+          <ul id="search-results"></ul>
+        </div>
+        <div>
+          <table id="cart-table"><thead><tr><th>Drug</th><th>Qty</th><th>Price</th><th>Line</th><th></th></tr></thead><tbody></tbody></table>
+          <div id="rx-panel" class="rx-panel hidden">
+            <strong>Prescription details</strong>
+            <label>Prescriber <input id="rx-prescriber" placeholder="Doctor's name"></label>
+            <label>Patient <input id="rx-patient" placeholder="Patient name"></label>
+          </div>
+          <div id="cart-total" class="total">Total: J$0.00</div>
+          <button id="btn-complete-sale" class="primary big">Complete sale</button>
+        </div>
+      </div>
+      <div id="receipt" class="receipt hidden"></div>
+    </section>
+
+    <section id="screen-inventory" class="screen hidden">
+      <h2>Inventory <span class="badge warn" id="alert-count"></span></h2>
+      <table id="inventory-table"><thead><tr><th>Drug</th><th>Batch</th><th>Expiry</th><th>Qty</th><th>Reorder</th><th>Status</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section id="screen-orders" class="screen hidden">
+      <h2>Purchase Orders</h2>
+      <div class="po-form">
+        <select id="po-supplier"></select>
+        <div id="po-lines"></div>
+        <button id="po-add-line" class="link">+ line</button>
+        <button id="po-send" class="primary">Send PO</button>
+      </div>
+      <table id="po-table"><thead><tr><th>#</th><th>Supplier</th><th>Lines</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section id="screen-dashboard" class="screen hidden">
+      <h2>Owner Dashboard</h2>
+      <div class="cards">
+        <div class="card"><div class="num" id="d-sales">J$0</div><div class="lbl">Today's sales</div></div>
+        <div class="card"><div class="num" id="d-count">0</div><div class="lbl">Transactions</div></div>
+        <div class="card"><div class="num red" id="d-low">0</div><div class="lbl">Low stock</div></div>
+        <div class="card"><div class="num" id="d-val">J$0</div><div class="lbl">Stock valuation</div></div>
+      </div>
+      <div class="panel"><h3>Alerts</h3><ul id="d-alerts"></ul></div>
+    </section>
+
+    <section id="screen-reports" class="screen hidden">
+      <h2>Reports</h2>
+      <div class="report-tabs">
+        <button data-r="daily" class="tab active">Daily sales</button>
+        <button data-r="expiry" class="tab">Expiry</button>
+        <button data-r="valuation" class="tab">Valuation</button>
+        <button data-r="reorder" class="tab">Reorder list</button>
+        <button data-r="rx" class="tab">Prescriptions</button>
+      </div>
+      <div id="report-out"></div>
+    </section>
+
+    <section id="screen-admin" class="screen hidden">
+      <h2>User Management</h2>
+      <div id="admin-users"></div>
+      <form id="admin-add" class="po-form">
+        <input id="adm-user" placeholder="username" required>
+        <select id="adm-role"><option value="owner">Owner</option><option value="pharmacist">Pharmacist</option><option value="cashier">Cashier</option></select>
+        <button class="primary" type="submit">Add user</button>
+      </form>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
